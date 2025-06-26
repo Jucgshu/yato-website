@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin">
+    <title>Accueil - YATO</title>
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preload" href="assets/fonts/rocks-death.woff2" as="font" type="font/woff2" crossorigin>
+    <script defer src="https://metrics.yato-rock.com/script.js" data-website-id="b2583b05-5b09-4ea8-9322-dec77ba3cf48"></script>
+    <style>
+        @font-face {
+            font-family: "Rock's Death";
+            src: url('assets/fonts/rocks-death.woff2') format('woff2'),
+                url('assets/fonts/rocks-death.woff') format('woff');
+            font-display: swap;
+        }
+        
+        /* Utilisation de la police de secours pendant le chargement */
+        .logo, .hero-title, .footer-logo {
+            font-family: "Rock's Death", Impact, sans-serif;
+            font-weight: 700;
+        }
+        
+        :root {
+            --primary: #e62b1e;
+            --dark-bg: #1a1a1a;
+            --medium-bg: #222;
+            --light-bg: #2a2a2a;
+            --accent: #ffcc00;
+            --text-light: #f5f5f5;
+            --text-medium: #ccc;
+            --text-dark: #999;
+            --border: #444;
+            --transition-duration: 0.5s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, h4 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header avec barre de séparation discrète */
+        header {
+            background-color: var(--dark-bg);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: top 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo, .hero-title, .footer-logo {
+            font-family: "Rock's Death", Impact, sans-serif;
+            font-weight: 700;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        /* Navigation épurée - Nouvel ordre */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 0;
+            transition: all var(--transition-duration);
+            position: relative;
+        }
+        
+        nav a:hover, 
+        nav a.active {
+            color: var(--text-light);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width var(--transition-duration);
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        /* Hero Section avec titre rock et fond flouté */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 90px;
+            overflow: hidden;
+        }
+        
+        /* Image de fond avec effet de flou */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/yato/band.jpg') no-repeat center center/cover;
+            filter: blur(4px);
+            z-index: -2;
+            transform: scale(1.05); /* Compensation du flou */
+        }
+        
+        /* Overlay sombre */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(30, 30, 30, 0.85), rgba(30, 30, 30, 0.9));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: -30px;
+            letter-spacing: 5px;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            position: relative;
+            text-align: center;
+
+            /* Solution alternative pour un rendu homogène */
+            text-shadow: 
+                0 0 3px rgba(0,0,0,0.8),
+                0 0 3px rgba(0,0,0,0.8),
+                0 0 3px rgba(0,0,0,0.8);
+            z-index: 1;
+            
+            /* Pour les navigateurs qui supportent text-stroke */
+            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.2);
+            text-stroke: 0.5px rgba(0,0,0,0.2);        
+        }
+        
+        .hero p {
+            font-family: "Rock's Death", Impact, sans-serif;
+            font-size: 1.5rem;
+            margin: 10px auto 20px;
+            color: var(--text-medium);
+            max-width: 600px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            text-align: center;
+            padding: 0 20px;
+            text-shadow: 0 0 3px rgba(0,0,0,0.7);
+        }
+        
+        .hero p::before,
+        .hero p::after {
+            content: '✧';
+            color: var(--primary);
+            margin: 0 15px;
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.8));
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-light);
+            padding: 15px 45px;
+            border: 2px solid var(--primary);
+            border-radius: 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all var(--transition-duration);
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 0 15px rgba(230, 43, 30, 0.4);
+        }
+        
+        /* Section Styles avec fonds plus clairs */
+        .section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--transition-duration), transform var(--transition-duration);
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .light-section {
+            background-color: var(--medium-bg);
+        }
+        
+        .dark-section {
+            background-color: var(--dark-bg);
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            display: none;
+        }
+        
+        .section-subtitle {
+            display: none;
+        }
+        
+        /* Tour Dates Section - Version épurée avec nouvelles dates */
+        .tour-dates {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tour-date {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-duration);
+            border-left: 3px solid transparent;
+            margin-bottom: 15px;
+            background: var(--light-bg);
+        }
+        
+        .tour-date:hover {
+            border-left: 3px solid var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .date-info {
+            flex: 1;
+            padding-left: 20px;
+        }
+        
+        .date-info h3 {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .date-info .location {
+            color: var(--text-medium);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .date-info .venue {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .date-info .city {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        
+        .tour-date .date {
+            min-width: 100px;
+            text-align: center;
+            background: var(--dark-bg);
+            padding: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .tour-date .date .day {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1;
+        }
+        
+        .tour-date .date .month {
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
+        /* Aperçu Photos et Vidéos */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            width: 100%;
+        }
+        
+        .preview-item {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all var(--transition-duration);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .preview-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(230, 43, 30, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .preview-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-duration);
+        }
+        
+        .preview-item:hover .preview-overlay {
+            opacity: 1;
+        }
+        
+        .preview-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        /* Contact Section simplifiée */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+        }
+        
+        .contact-text {
+            color: var(--text-medium);
+        }
+        
+        .contact-text strong {
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all var(--transition-duration);
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form {
+            width: 100%;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-family: 'Roboto', sans-serif;
+            transition: border-color var(--transition-duration);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        /* Feedback messages */
+        .feedback {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+            transition: all var(--transition-duration);
+        }
+        
+        .feedback.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+        }
+        
+        .feedback.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+        
+        /* Footer */
+        footer {
+            background: #151515;
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: inline-block;
+            letter-spacing: 3px;
+            transition: transform var(--transition-duration);
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-tagline {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .copyright {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            max-width: 500px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+        }
+        
+        /* Lightbox Styles améliorée */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            animation: zoom 0.3s;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            display: block;
+            margin: auto;
+        }
+        
+        .lightbox-video {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+        
+        @keyframes zoom {
+            from {transform: scale(0.9); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 3100;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 3050;
+        }
+        
+        .prev, .next {
+            cursor: pointer;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            padding: 15px;
+            transition: 0.3s;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .prev:hover, .next:hover {
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        #caption {
+            margin: 15px auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        /* Correction du centrage vertical */
+        .media-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh; /* Prend toute la hauteur de l'écran */
+            position: relative;
+        }
+        
+        .media-content {
+            max-width: 90%;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Debug info */
+        .debug-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 10000;
+            display: none;
+        }
+        
+        /* Styles optimisés pour la popup de news */
+        .news-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            max-width: 380px;
+            width: 100%;
+            background: var(--medium-bg);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            display: none;
+            text-align: center;
+            will-change: transform, opacity;
+        }
+        
+        .news-popup.visible {
+            transform: translateY(0);
+            opacity: 1;
+            display: block;
+        }
+        
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .popup-title {
+            font-family: "Rock's Death", Impact, sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex: 1;
+            text-align: center;
+            padding-right: 30px;
+        }
+        
+        .close-popup {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+            line-height: 1;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .close-popup:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .popup-content {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 90%;
+        }
+        
+        .popup-highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .popup-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .popup-action {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .popup-action:hover {
+            background: #c22419;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(230, 43, 30, 0.3);
+        }
+        
+        /* Styles pour le bouton de réouverture */
+        .reopen-popup-container {
+            text-align: center;
+            margin: 25px auto 10px;
+            width: 100%;
+        }
+        
+        .reopen-btn {
+            background: var(--primary);
+            color: var(--text-light);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .reopen-btn:hover {
+            background: #c22419;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(230, 43, 30, 0.3);
+        }
+        
+        /* Responsive pour petits écrans */
+        @media only screen and (max-width: 768px) {
+            .news-popup {
+                max-width: calc(100% - 40px);
+                right: 20px;
+                bottom: 20px;
+                left: 20px;
+                padding: 20px;
+            }
+            
+            .popup-title {
+                font-size: 1.2rem;
+                padding-right: 25px;
+            }
+            
+            .popup-content {
+                font-size: 1rem;
+            }
+            
+            .close-popup {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .reopen-btn {
+                font-size: 0.85rem;
+                padding: 10px 20px;
+            }
+        }
+        
+        @media only screen and (max-width: 480px) {
+            .news-popup {
+                padding: 15px;
+                bottom: 15px;
+                right: 15px;
+                left: 15px;
+            }
+            
+            .popup-title {
+                font-size: 1.1rem;
+                padding-right: 20px;
+            }
+            
+            .popup-content {
+                font-size: 0.95rem;
+            }
+            
+            .popup-action {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .reopen-btn {
+                width: 90%;
+                justify-content: center;
+            }
+        }
+        
+        /* Pour les petits écrans */
+        @media only screen and (max-width: 992px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+            
+            .lightbox-video {
+                width: 90%;
+                height: auto;
+            }
+            
+            .prev, .next {
+                font-size: 40px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            /* Menu hamburger pour mobile */
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: var(--dark-bg);
+                transition: right var(--transition-duration) ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 70px 20px 20px;
+                margin-top: 0;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            nav a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                margin-bottom: -20px;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 15px;
+                max-width: 90%;
+                box-sizing: border-box;
+                letter-spacing: 1px;
+                margin: 15px auto 20px;
+                line-height: 1.4;
+            }
+            
+            .hero p::before,
+            .hero p::after {
+                content: none; /* Supprime les symboles */
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .tour-date {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .date-info {
+                padding-left: 0;
+                margin-top: 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .lightbox-content {
+                width: 95%;
+            }
+            
+            #caption {
+                width: 95%;
+            }
+            
+            .prev, .next {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .hero {
+                padding-top: 80px;
+            }
+            
+            /* Correction centrage boutons */
+            .preview-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .preview-section > .btn {
+                display: block;
+                margin: 20px auto 0;
+                width: max-content;
+                max-width: 90%;
+                text-align: center;
+            }
+        }
+        
+        @media only screen and (max-width: 576px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .preview-section > .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                white-space: normal;
+            }
+            
+            .tour-date .date {
+                margin-bottom: 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .prev, .next {
+                font-size: 25px;
+                width: 35px;
+                height: 35px;
+                padding: 10px;
+            }
+            
+            .hero {
+                padding-top: 70px;
+                font-size: 1rem;
+                padding: 0 10px;
+                max-width: 95%;
+                letter-spacing: 0.5px;
+                margin: 10px auto 15px;
+            }
+
+        }
+
+        @media only screen and (max-width: 400px) {
+            .hero p {
+                font-size: 0.9rem; /* Taille minimale */
+                max-width: 100%; /* Prend toute la largeur disponible */
+                padding: 0 5px; /* Padding minimal */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation avec barre discrète -->
+    <header>
+        <div class="header-container container">
+            <a href="#home" class="logo">Y<span>ATO</span></a>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">Accueil</a></li>
+                    <li><a href="#tour">Concerts</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                    <li><a href="#videos">Vidéos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section avec titre rock -->
+    <section id="home" class="hero">
+        <!-- Nouveaux éléments pour l'effet de flou -->
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Yato</h1>
+            <p>Groupe de reprises Rock</p>
+            <a href="#tour" class="btn">Voir les dates</a>
+        </div>
+    </section>
+
+    <!-- Tour Dates Section - Version épurée avec nouvelles dates -->
+    <section id="tour" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Prochains concerts</h2>
+            </div>
+            <div class="tour-dates">
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">21</div>
+                        <div class="month">JUIN</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Fête de la musique</h3>
+                        <div class="location">
+                            <span class="venue">Place de l'Hôtel de Ville</span>
+                            <span class="city">Ribeauvillé</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">29</div>
+                        <div class="month">JUIN</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Foulées de la ligue</h3>
+                        <div class="location">
+                            <span class="venue">Parc Expo, Av. de la Foire aux Vins</span>
+                            <span class="city">Colmar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">12</div>
+                        <div class="month">JUIL</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>34ème course de côtes de motos anciennes</h3>
+                        <div class="location">
+                            <span class="venue">D310</span>
+                            <span class="city">Gaschney, Muhlbach-sur-Munster</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">18</div>
+                        <div class="month">JUIL</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Taal</h3>
+                        <div class="location">
+                            <span class="venue">4 Rue de Soultzbach</span>
+                            <span class="city">Wihr-au-Val</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">18</div>
+                        <div class="month">OCT</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Bar Joe</h3>
+                        <div class="location">
+                            <span class="venue">28 Rue de la Gare</span>
+                            <span class="city">Wihr-au-Val</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Preview Section -->
+    <section id="photos" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photos récentes</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image1.jpg">
+                        <img src="images/yato/image1.jpg" alt="Concert au Joe Bar - 2024" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image2.jpg">
+                        <img src="images/yato/image2.jpg" alt="Scène principale - Rock en Seine" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image3.jpg">
+                        <img src="images/yato/image3.jpg" alt="Performance live - Parc Expo Colmar" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image4.jpg">
+                        <img src="images/yato/image4.jpg" alt="Public en délire - Taal Wihr-au-Val" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="photos.html" class="btn">Voir toutes les photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Preview Section -->
+    <section id="videos" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vidéos</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="video" data-src="images/yato/video1.mp4">
+                        <img src="images/yato/video1-preview.png" alt="Miss You" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video2.mp4">
+                        <img src="images/yato/video2-preview.png" alt="Whatever You Want" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video3.mp4">
+                        <img src="images/yato/video3-preview.png" alt="With or Withou You" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video4.mp4">
+                        <img src="images/yato/video4-preview.png" alt="I Don't Need no Doctor" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="" class="btn">Voir toutes les vidéos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section simplifiée -->
+    <section id="contact" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacts & réseaux</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-section">
+                    <div class="contact-info">
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/yato.groupe/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/yato.groupe" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.youtube.com/@yato.groupe" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="mailto:contact@yato-rock.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <div class="feedback" id="feedback"></div>
+                        
+                        <div class="submit-container">
+                            <button type="submit" class="btn" id="submitBtn">
+                                <span id="btnText">Envoyer</span>
+                                <span id="btnSpinner" class="spinner" style="display: none;"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#home" class="footer-logo"><span>YATO</span></a>
+                <p class="footer-tagline">Paasion Rock • Depuis 1999</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/yato.groupe/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/yato.groupe" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/@yato.groupe" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="mailto:contact@yato-rock.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 YATO. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Container avec navigation -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-nav">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+        <div class="media-container">
+            <div class="media-content">
+                <!-- Contenu sera ajouté dynamiquement -->
+            </div>
+        </div>
+        <div id="caption"></div>
+    </div>
+
+    <!-- Debug info -->
+    <div class="debug-info" id="debugInfo"></div>
+
+    <!-- Popup de nouvelles -->
+    <div class="news-popup" id="newsPopup">
+        <div class="popup-header">
+            <h3 class="popup-title">Annonces de YATO</h3>
+            <button class="close-popup" id="closePopup">&times;</button>
+        </div>
+        <div class="popup-content">
+            <p>YATO recherche des <span class="popup-highlight">cuivres</span> pour étendre son répertoire !</p>
+            <p>Saxophonistes et trompettistes, si vous souhaitez rejoindre notre formation rock, contactez-nous !</p>
+        </div>
+        <div class="popup-footer">
+            <a href="#contact" class="popup-action">Nous contacter</a>
+        </div>
+    </div>
+    <script>
+        // Configuration du proxy Google Apps Script
+        // REMPLACER PAR VOTRE URL DE SCRIPT GOOGLE
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbzQE52CZiJodwWh3m6yfvIjKPOTIhiR_DsAUFUCKZ1Hz0mRy6BL8-BzIUF08A4e1v7X/exec';
+        
+        // Configuration de secours Telegram
+        const TELEGRAM_BOT_TOKEN = 'VOTRE_BOT_TOKEN';
+        const TELEGRAM_CHAT_ID = 'VOTRE_CHAT_ID';
+        
+        // Gestion du menu mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) mainNav.classList.remove('active');
+            });
+        });
+        
+        // Animation de navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                // Fermer le menu mobile si nécessaire
+                if (window.innerWidth <= 768) {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                }
+                
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+                
+                // Animation de défilement fluide
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Compenser la hauteur du header
+                    behavior: 'smooth'
+                });
+                
+                // Mettre à jour le menu actif
+                document.querySelectorAll('#main-nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Lightbox pour photos et vidéos
+        const lightbox = document.getElementById('lightbox');
+        const mediaContent = lightbox.querySelector('.media-content');
+        const captionText = document.getElementById('caption');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const closeBtn = document.querySelector('.close');
+        
+        // Galeries séparées pour photos et vidéos
+        let galleryPhotos = []; // Déclaré avec let pour permettre la réinitialisation
+        let galleryVideos = []; // Déclaré avec let pour permettre la réinitialisation
+        let currentGallery = [];
+        let currentIndex = 0;
+        let currentType = '';
+        let currentVideoElement = null;
+        
+        // Initialiser les galeries
+        function initGalleries() {
+            // Réinitialiser les tableaux avant chaque chargement
+            galleryPhotos = [];
+            galleryVideos = [];
+            
+            // Photos
+            const photoItems = document.querySelectorAll('#photos .preview-item');
+            photoItems.forEach(item => {
+                const img = item.querySelector('img');
+                galleryPhotos.push({
+                    src: item.dataset.src,
+                    alt: img.alt,
+                    type: 'photo'
+                });
+            });
+            
+            // Vidéos
+            const videoItems = document.querySelectorAll('#videos .preview-item');
+            videoItems.forEach(item => {
+                const img = item.querySelector('img');
+                galleryVideos.push({
+                    src: item.dataset.src,
+                    alt: img.alt,
+                    type: 'video'
+                });
+            });
+        }
+        
+        // Ouvrir la lightbox
+        function openLightbox(type, index) {
+            currentType = type;
+            currentGallery = type === 'photos' ? galleryPhotos : galleryVideos;
+            currentIndex = index;
+            
+            showMedia(currentGallery[currentIndex]);
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Afficher le média
+        function showMedia(media) {
+            // Arrêter la vidéo précédente si elle existe
+            if (currentVideoElement) {
+                currentVideoElement.pause();
+                currentVideoElement.currentTime = 0;
+                currentVideoElement = null;
+            }
+            
+            mediaContent.innerHTML = '';
+            captionText.innerHTML = media.alt;
+            
+            if (media.type === 'photo') {
+                const img = document.createElement('img');
+                img.src = media.src;
+                img.alt = media.alt;
+                img.classList.add('lightbox-content');
+                mediaContent.appendChild(img);
+            } else if (media.type === 'video') {
+                const video = document.createElement('video');
+                video.src = media.src;
+                video.controls = true;
+                video.autoplay = true;
+                video.classList.add('lightbox-video');
+                mediaContent.appendChild(video);
+                currentVideoElement = video;
+            }
+        }
+        
+        // Navigation dans la lightbox
+        function nextMedia() {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            showMedia(currentGallery[currentIndex]);
+        }
+        
+        function prevMedia() {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            showMedia(currentGallery[currentIndex]);
+        }
+        
+        // Fermer la lightbox
+        function closeLightbox() {
+            // Arrêter la vidéo en cours
+            if (currentVideoElement) {
+                currentVideoElement.pause();
+                currentVideoElement.currentTime = 0;
+                currentVideoElement = null;
+            }
+            
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Écouteurs d'événements
+        function setupEventListeners() {
+            // Photos
+            document.querySelectorAll('#photos .preview-item').forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox('photos', index));
+            });
+            
+            // Vidéos
+            document.querySelectorAll('#videos .preview-item').forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox('videos', index));
+            });
+            
+            // Navigation
+            prevBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                prevMedia();
+            });
+            
+            nextBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                nextMedia();
+            });
+            
+            // Fermeture
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', e => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            
+            // Clavier
+            document.addEventListener('keydown', e => {
+                if (lightbox.style.display === 'block') {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextMedia();
+                    if (e.key === 'ArrowLeft') prevMedia();
+                }
+            });
+        }
+        
+        // Animation des sections lors du défilement
+        function setupScrollAnimations() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+        
+        // Initialisation
+        initGalleries();
+        setupEventListeners();
+        setupScrollAnimations();
+        
+        // Gestion du formulaire de contact corrigée
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Récupération des valeurs
+            const nom = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const sujet = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const feedback = document.getElementById('feedback');
+            
+            // Afficher l'indicateur de chargement
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            btnText.textContent = 'Envoi en cours...';
+            btnSpinner.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            // Préparer les données au format application/x-www-form-urlencoded
+            const formData = new URLSearchParams();
+            formData.append('nom', nom);
+            formData.append('email', email);
+            formData.append('sujet', sujet);
+            formData.append('message', message);
+            
+            try {
+                // Envoyer la requête
+                const response = await fetch(googleScriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                });
+                
+                // Gérer la réponse
+                const responseText = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (error) {
+                    throw new Error('Réponse invalide du serveur: ' + responseText);
+                }
+                
+                if (data.success) {
+                    // Afficher un message de succès
+                    feedback.textContent = 'Message envoyé avec succès!';
+                    feedback.className = 'feedback success';
+                    feedback.style.display = 'block';
+                    
+                    // Réinitialiser le formulaire
+                    document.getElementById('contactForm').reset();
+                    
+                    // Masquer le feedback après 5 secondes
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 5000);
+                } else {
+                    // Afficher l'erreur spécifique
+                    const errorMsg = data.error || 'Erreur lors de l\'envoi';
+                    feedback.textContent = errorMsg;
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Erreur avec Google Script:', error);
+                
+                // Solution de secours : Envoyer directement à Telegram
+                try {
+                    const text = `📬 Message de contact (secours)!\n\n` +
+                                 `Nom: ${nom}\n` +
+                                 `Email: ${email}\n` +
+                                 `Sujet: ${sujet}\n\n` +
+                                 `Message:\n${message}`;
+                    
+                    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                    const response = await fetch(telegramUrl, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: text
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        feedback.textContent = 'Message envoyé via secours!';
+                        feedback.className = 'feedback success';
+                        feedback.style.display = 'block';
+                        document.getElementById('contactForm').reset();
+                    } else {
+                        throw new Error('Échec du secours Telegram');
+                    }
+                } catch (fallbackError) {
+                    console.error('Erreur de secours:', fallbackError);
+                    feedback.textContent = 'Erreur grave. Contactez-nous par email.';
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                }
+            } finally {
+                // Réinitialiser le bouton
+                btnText.textContent = 'Envoyer';
+                btnSpinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+    
+     <!-- Mise à jour des photos récentes -->
+        
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const fetchLatestPhotos = async () => {
+        try {
+          const response = await fetch('photos.html');
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          
+          // Récupérer toutes les images de la galerie
+          const galleryItems = doc.querySelectorAll('.gallery-item');
+          const photos = [];
+          
+          // Extraire les chemins des images
+          galleryItems.forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+              photos.push({
+                src: img.getAttribute('src'),
+                alt: img.getAttribute('alt'),
+                category: item.dataset.category
+              });
+            }
+          });
+          
+          // Trier par date (catégorie = année)
+          photos.sort((a, b) => b.category.localeCompare(a.category));
+          
+          // Sélectionner les 4 premières photos
+          const latestPhotos = photos.slice(0, 4);
+          
+          // Mettre à jour la section photos de l'index
+          const previewItems = document.querySelectorAll('#photos .preview-item');
+          
+          previewItems.forEach((item, index) => {
+            // Ajouter un indicateur de chargement
+            const loader = document.createElement('div');
+            loader.className = 'image-loader';
+            item.appendChild(loader);
+            
+            if (latestPhotos[index]) {
+              const photo = latestPhotos[index];
+              item.dataset.src = photo.src;
+              const img = item.querySelector('img');
+              img.src = photo.src;
+              img.alt = photo.alt;
+            }
+          });
+          
+        } catch (error) {
+          console.error('Erreur lors du chargement des photos:', error);
+        } finally {
+          // Réinitialiser les galeries après mise à jour des images
+          initGalleries();
+          
+          // Retirer les loaders après le chargement des images
+          const loaders = document.querySelectorAll('.image-loader');
+          loaders.forEach(loader => loader.remove());
+        }
+      };
+    
+      fetchLatestPhotos();
+      
+      // Style pour l'indicateur de chargement
+      const style = document.createElement('style');
+      style.textContent = `
+        .image-loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.7) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23e62b1e" stroke-width="10" stroke-dasharray="180" stroke-dashoffset="90"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/></circle></svg>') center/50px no-repeat;
+          z-index: 2;
+          transition: opacity 0.3s;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+    
+        // Gestion de la popup de nouvelles
+        const newsPopup = document.getElementById('newsPopup');
+        const closePopupBtn = document.getElementById('closePopup');
+        const contactButton = document.querySelector('.popup-action');
+        
+        // Fonction pour afficher la popup
+        function showNewsPopup() {
+            // Vérifier si l'utilisateur a déjà fermé cette popup
+            const popupDismissed = localStorage.getItem('popupDismissed');
+            
+            if (!popupDismissed) {
+                // Afficher après un court délai
+                setTimeout(() => {
+                    newsPopup.classList.add('visible');
+                }, 2000); // Délai de 2 secondes
+            }
+        }
+        
+        // Fonction pour fermer la popup
+        function closeNewsPopup() {
+            newsPopup.classList.remove('visible');
+            
+            // Stocker dans localStorage que l'utilisateur a fermé la popup
+            localStorage.setItem('popupDismissed', 'true');
+        }
+        
+        // Écouteurs d'événements
+        closePopupBtn.addEventListener('click', closeNewsPopup);
+        contactButton.addEventListener('click', closeNewsPopup);
+        
+        // Afficher la popup au chargement de la page
+        document.addEventListener('DOMContentLoaded', showNewsPopup);
+
+    </script>    
+    
+</body>
+</html>

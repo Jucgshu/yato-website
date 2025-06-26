@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YATO - Groupe de Rock</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root {
+            --primary: #e62b1e;
+            --dark-bg: #1a1a1a;
+            --medium-bg: #222;
+            --light-bg: #2a2a2a;
+            --accent: #ffcc00;
+            --text-light: #f5f5f5;
+            --text-medium: #ccc;
+            --text-dark: #999;
+            --border: #444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header avec barre de séparation discrète */
+        header {
+            background-color: var(--dark-bg);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        /* Navigation épurée - Nouvel ordre */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 0;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover, 
+        nav a.active {
+            color: var(--text-light);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+        
+        /* Hero Section avec titre rock */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(30, 30, 30, 0.8), rgba(30, 30, 30, 0.8)), url('images/yato/band.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 90px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-title {
+            font-size: 6rem;
+            margin-bottom: -40px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .hero-title .y-part {
+            color: var(--text-light);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title .ato-part {
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(230, 43, 30, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.8rem;
+            margin: 10px auto 20px;
+            color: var(--text-medium);
+            max-width: 600px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .hero p::before,
+        .hero p::after {
+            content: '✧';
+            color: var(--primary);
+            margin: 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-light);
+            padding: 15px 45px;
+            border: 2px solid var(--primary);
+            border-radius: 0;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(230, 43, 30, 0.4);
+        }
+        
+        /* Section Styles avec fonds plus clairs */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .light-section {
+            background-color: var(--medium-bg);
+        }
+        
+        .dark-section {
+            background-color: var(--dark-bg);
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            display: none;
+        }
+        
+        .section-subtitle {
+            display: none;
+        }
+        
+        /* Tour Dates Section - Version épurée avec nouvelles dates */
+        .tour-dates {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tour-date {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            margin-bottom: 15px;
+            background: var(--light-bg);
+        }
+        
+        .tour-date:hover {
+            border-left: 3px solid var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .date-info {
+            flex: 1;
+            padding-left: 20px;
+        }
+        
+        .date-info h3 {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .date-info .location {
+            color: var(--text-medium);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .date-info .venue {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .date-info .city {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        
+        .tour-date .date {
+            min-width: 100px;
+            text-align: center;
+            background: var(--dark-bg);
+            padding: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .tour-date .date .day {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            line-height: 1;
+        }
+        
+        .tour-date .date .month {
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
+        /* Aperçu Photos et Vidéos */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            width: 100%;
+        }
+        
+        .preview-item {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .preview-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(230, 43, 30, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .preview-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .preview-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .preview-item:hover .preview-overlay {
+            opacity: 1;
+        }
+        
+        .preview-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        /* Contact Section simplifiée */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            margin-bottom: 15px;
+        }
+        
+        .contact-text {
+            color: var(--text-medium);
+        }
+        
+        .contact-text strong {
+            color: var(--text-light);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form {
+            width: 100%;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #151515;
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: inline-block;
+            letter-spacing: 3px;
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-tagline {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .copyright {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            max-width: 500px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+        }
+        
+        /* Lightbox Styles améliorée */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 80vh;
+            animation: zoom 0.3s;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            display: block;
+            margin: auto;
+        }
+        
+        .lightbox-video {
+            width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+        
+        @keyframes zoom {
+            from {transform: scale(0.9); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 3100;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 3050;
+        }
+        
+        .prev, .next {
+            cursor: pointer;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            padding: 15px;
+            transition: 0.3s;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .prev:hover, .next:hover {
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        #caption {
+            margin: 15px auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        /* Correction du centrage vertical */
+        .media-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh; /* Prend toute la hauteur de l'écran */
+            position: relative;
+        }
+        
+        .media-content {
+            max-width: 90%;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Menu mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Pour les petits écrans */
+        @media only screen and (max-width: 992px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+            
+            .lightbox-video {
+                width: 90%;
+                height: auto;
+            }
+            
+            .prev, .next {
+                font-size: 40px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            /* Menu hamburger pour mobile */
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background: var(--dark-bg);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 70px 20px 20px;
+                margin-top: 0;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            nav a {
+                font-size: 1.1rem;
+                padding: 10px 0;
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                margin-bottom: -20px;
+            }
+            
+            .hero p {
+                font-size: 1.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .tour-date {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .date-info {
+                padding-left: 0;
+                margin-top: 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .lightbox-content {
+                width: 95%;
+            }
+            
+            #caption {
+                width: 95%;
+            }
+            
+            .prev, .next {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .hero {
+                padding-top: 80px;
+            }
+        }
+        
+        @media only screen and (max-width: 576px) {
+            .header-container {
+                padding: 10px 15px;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            nav {
+                width: 250px;
+                right: -250px;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .tour-date .date {
+                margin-bottom: 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .prev, .next {
+                font-size: 25px;
+                width: 35px;
+                height: 35px;
+                padding: 10px;
+            }
+            
+            .hero {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation avec barre discrète -->
+    <header>
+        <div class="header-container container">
+            <a href="#" class="logo">Y<span>ATO</span></a>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">Accueil</a></li>
+                    <li><a href="#tour">Concerts</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                    <li><a href="#videos">Vidéos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section avec titre rock -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="y-part">Y</span><span class="ato-part">ATO</span>
+            </h1>
+            <p>Groupe de reprises Rock</p>
+            <a href="#tour" class="btn">Voir les dates</a>
+        </div>
+    </section>
+
+    <!-- Tour Dates Section - Version épurée avec nouvelles dates -->
+    <section id="tour" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Prochains concerts</h2>
+            </div>
+            <div class="tour-dates">
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">21</div>
+                        <div class="month">JUIN</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Fête de la musique</h3>
+                        <div class="location">
+                            <span class="venue">Place de l'Hôtel de Ville</span>
+                            <span class="city">Ribeauvillé</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">29</div>
+                        <div class="month">JUIN</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Foulées de la ligue</h3>
+                        <div class="location">
+                            <span class="venue">Parc Expo, Av. de la Foire aux Vins</span>
+                            <span class="city">Colmar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">12</div>
+                        <div class="month">JUIL</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>34ème course de côtes de motos anciennes</h3>
+                        <div class="location">
+                            <span class="venue">D310</span>
+                            <span class="city">Gaschney, Muhlbach-sur-Munster</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">18</div>
+                        <div class="month">JUIL</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Taal</h3>
+                        <div class="location">
+                            <span class="venue">4 Rue de Soultzbach</span>
+                            <span class="city">Wihr-au-Val</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tour-date">
+                    <div class="date">
+                        <div class="day">18</div>
+                        <div class="month">OCT</div>
+                    </div>
+                    <div class="date-info">
+                        <h3>Bar Joe</h3>
+                        <div class="location">
+                            <span class="venue">28 Rue de la Gare</span>
+                            <span class="city">Wihr-au-Val</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Preview Section -->
+    <section id="photos" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photos</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image1.jpg">
+                        <img src="images/yato/image1.jpg" alt="Concert au Joe Bar - 2024">
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image2.jpg">
+                        <img src="images/yato/image2.jpg" alt="Scène principale - Rock en Seine">
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image3.jpg">
+                        <img src="images/yato/image3.jpg" alt="Performance live - Parc Expo Colmar">
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image4.jpg">
+                        <img src="images/yato/image4.jpg" alt="Public en délire - Taal Wihr-au-Val">
+                    </div>
+                </div>
+                
+                <a href="photos.html" class="btn">Voir toutes les photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Preview Section -->
+    <section id="videos" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vidéos</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="video" data-src="images/yato/video1.mp4">
+                        <img src="images/yato/video1-preview.png" alt="Live complet au Kunheim Hangar">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video2.mp4">
+                        <img src="images/yato/video2-preview.png" alt="Clip - Highway to Hell">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video3.mp4">
+                        <img src="images/yato/video3-preview.png" alt="Backstage - Ribeauvillé">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video4.mp4">
+                        <img src="images/yato/video4-preview.png" alt="Session studio - Gaschney">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="videos.html" class="btn">Voir toutes les vidéos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section simplifiée -->
+    <section id="contact" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact & réseaux</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-section">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-text">
+                                <strong>Mail</strong>
+                                <p>booking@yato-rock.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/yato.groupe/" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/yato.groupe" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.youtube.com/@yato.groupe" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        
+                        <div class="submit-container">
+                            <button type="submit" class="btn">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo"><span>YATO</span></a>
+                <p class="footer-tagline">Rock • Alsace • Depuis 2018</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/yato.groupe/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/yato.groupe" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/@yato.groupe" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 YATO. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Container avec navigation -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-nav">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+        <div class="media-container">
+            <div class="media-content">
+                <!-- Contenu sera ajouté dynamiquement -->
+            </div>
+        </div>
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        // Gestion du menu mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Lightbox pour photos et vidéos
+        const lightbox = document.getElementById('lightbox');
+        const mediaContent = lightbox.querySelector('.media-content');
+        const captionText = document.getElementById('caption');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const closeBtn = document.querySelector('.close');
+        
+        // Galeries séparées pour photos et vidéos
+        let galleryPhotos = [];
+        let galleryVideos = [];
+        let currentGallery = [];
+        let currentIndex = 0;
+        let currentType = '';
+        let currentVideoElement = null;
+        
+        // Initialiser les galeries
+        function initGalleries() {
+            // Photos
+            const photoItems = document.querySelectorAll('#photos .preview-item');
+            photoItems.forEach(item => {
+                const img = item.querySelector('img');
+                galleryPhotos.push({
+                    src: item.dataset.src,
+                    alt: img.alt,
+                    type: 'photo'
+                });
+            });
+            
+            // Vidéos
+            const videoItems = document.querySelectorAll('#videos .preview-item');
+            videoItems.forEach(item => {
+                const img = item.querySelector('img');
+                galleryVideos.push({
+                    src: item.dataset.src,
+                    alt: img.alt,
+                    type: 'video'
+                });
+            });
+        }
+        
+        // Ouvrir la lightbox
+        function openLightbox(type, index) {
+            currentType = type;
+            currentGallery = type === 'photos' ? galleryPhotos : galleryVideos;
+            currentIndex = index;
+            
+            showMedia(currentGallery[currentIndex]);
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Afficher le média
+        function showMedia(media) {
+            // Arrêter la vidéo précédente si elle existe
+            if (currentVideoElement) {
+                currentVideoElement.pause();
+                currentVideoElement.currentTime = 0;
+                currentVideoElement = null;
+            }
+            
+            mediaContent.innerHTML = '';
+            captionText.innerHTML = media.alt;
+            
+            if (media.type === 'photo') {
+                const img = document.createElement('img');
+                img.src = media.src;
+                img.alt = media.alt;
+                img.classList.add('lightbox-content');
+                mediaContent.appendChild(img);
+            } else if (media.type === 'video') {
+                const video = document.createElement('video');
+                video.src = media.src;
+                video.controls = true;
+                video.autoplay = true;
+                video.classList.add('lightbox-video');
+                mediaContent.appendChild(video);
+                currentVideoElement = video;
+            }
+        }
+        
+        // Navigation dans la lightbox
+        function nextMedia() {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            showMedia(currentGallery[currentIndex]);
+        }
+        
+        function prevMedia() {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            showMedia(currentGallery[currentIndex]);
+        }
+        
+        // Fermer la lightbox
+        function closeLightbox() {
+            // Arrêter la vidéo en cours
+            if (currentVideoElement) {
+                currentVideoElement.pause();
+                currentVideoElement.currentTime = 0;
+                currentVideoElement = null;
+            }
+            
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Écouteurs d'événements
+        function setupEventListeners() {
+            // Photos
+            document.querySelectorAll('#photos .preview-item').forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox('photos', index));
+            });
+            
+            // Vidéos
+            document.querySelectorAll('#videos .preview-item').forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox('videos', index));
+            });
+            
+            // Navigation
+            prevBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                prevMedia();
+            });
+            
+            nextBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                nextMedia();
+            });
+            
+            // Fermeture
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', e => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            
+            // Clavier
+            document.addEventListener('keydown', e => {
+                if (lightbox.style.display === 'block') {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextMedia();
+                    if (e.key === 'ArrowLeft') prevMedia();
+                }
+            });
+        }
+        
+        // Initialisation
+        initGalleries();
+        setupEventListeners();
+    </script>
+</body>
+</html>
