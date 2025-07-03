@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin">
+    <meta name="description" content="YATO - Groupe de reprises rock. Découvrez nos dates de concerts, photos et vidéos. Contactez-nous pour vos événements.">
+    <meta name="keywords" content="groupe rock, reprises rock, concerts rock, musique live, YATO, rock">
+    <meta name="author" content="YATO">
+    <title>Accueil - YATO</title>
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preload" href="assets/fonts/rocks-death.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="images/logo.webp" as="image" type="image/webp">
+
+</head>
+<body>
+    <!-- Header & Navigation avec barre discrète -->
+    <header>
+        <div class="header-container container">
+            <a href="#home" class="logo">Y<span>ATO</span></a>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">Accueil</a></li>
+                    <li><a href="#tour">Concerts</a></li>
+                    <li><a href="#photos">Photos</a></li>
+                    <li><a href="#videos">Vidéos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section avec titre rock -->
+    <section id="home" class="hero">
+        <!-- Nouveaux éléments pour l'effet de flou -->
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <img src="images/logo.svg" alt="YATO - Groupe de reprises rock" loading="eager">
+            </h1>
+            <p>Groupe de reprises Rock</p>
+            <a href="#tour" class="btn">Voir les dates</a>
+        </div>
+    </section>
+
+    <!-- Tour Dates Section - Organisation dynamique -->
+    <section id="tour" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Concerts</h2>
+            </div>
+            
+            <!-- Nouveaux onglets -->
+            <div class="concert-tabs">
+                <button class="concert-tab active" data-tab="upcoming">Concerts à venir</button>
+                <button class="concert-tab" data-tab="past">Concerts passés</button>
+            </div>
+            
+            <!-- Conteneur pour les concerts à venir -->
+            <div id="upcoming-tour-dates" class="tour-dates"></div>
+            
+            <!-- Conteneur pour les concerts passés (initialement caché) -->
+            <div id="past-tour-dates" class="tour-dates" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- Photos Preview Section -->
+    <section id="photos" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photos récentes</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image1.jpg">
+                        <img src="images/yato/image1.jpg" alt="Concert au Joe Bar - 2024" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image2.jpg">
+                        <img src="images/yato/image2.jpg" alt="Scène principale - Rock en Seine" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image3.jpg">
+                        <img src="images/yato/image3.jpg" alt="Performance live - Parc Expo Colmar" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="photo" data-src="images/yato/image4.jpg">
+                        <img src="images/yato/image4.jpg" alt="Public en délire - Taal Wihr-au-Val" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="photos.html" class="btn">Voir toutes les photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Preview Section -->
+    <section id="videos" class="section light-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vidéos</h2>
+            </div>
+            
+            <div class="preview-section">
+                <div class="preview-container">
+                    <div class="preview-item" data-type="video" data-src="images/yato/video1.mp4">
+                        <img src="images/yato/video1-preview.png" alt="Miss You" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video2.mp4">
+                        <img src="images/yato/video2-preview.png" alt="Whatever You Want" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video3.mp4">
+                        <img src="images/yato/video3-preview.png" alt="With or Withou You" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-item" data-type="video" data-src="images/yato/video4.mp4">
+                        <img src="images/yato/video4-preview.png" alt="I Don't Need no Doctor" loading="lazy">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="" class="btn">Voir toutes les vidéos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section simplifiée -->
+    <section id="contact" class="section dark-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacts & réseaux</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-section">
+                    <div class="contact-info">
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/yato.groupe/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/yato.groupe" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.youtube.com/@yato.groupe" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="mailto:contact@yato-rock.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <div class="feedback" id="feedback"></div>
+                        
+                        <div class="submit-container">
+                            <button type="submit" class="btn" id="submitBtn">
+                                <span id="btnText">Envoyer</span>
+                                <span id="btnSpinner" class="spinner" style="display: none;"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#home" class="footer-logo"><span>YATO</span></a>
+                <p class="footer-tagline">Passion Rock • Depuis 1999</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/yato.groupe/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/yato.groupe" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/@yato.groupe" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="mailto:contact@yato-rock.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 YATO. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Container avec navigation -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-nav">
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
+        <div class="media-container">
+            <div class="media-content">
+                <!-- Contenu sera ajouté dynamiquement -->
+            </div>
+        </div>
+        <div id="caption"></div>
+    </div>
+
+    <!-- Debug info -->
+    <div class="debug-info" id="debugInfo"></div>
+
+    <!-- Popup de nouvelles -->
+    <div class="news-popup" id="newsPopup">
+        <div class="popup-header">
+            <h3 class="popup-title">Annonces de YATO</h3>
+            <button class="close-popup" id="closePopup">&times;</button>
+        </div>
+        <div class="popup-content">
+            <p>YATO recherche des <span class="popup-highlight">cuivres</span> pour étendre son répertoire !</p>
+            <p>Amis saxophonistes, trompettistes ou autres, si vous êtes intéressés, contactez-nous !</p>
+        </div>
+        <div class="popup-footer">
+            <a href="#contact" class="popup-action">Nous contacter</a>
+        </div>
+    </div>
+    
+    <!-- Intégration JavaScript -->
+    <script src="assets/js/custom.js" defer></script>
+
+</body>
+</html>
