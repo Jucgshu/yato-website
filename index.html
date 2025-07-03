@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preload" href="assets/fonts/rocks-death.woff2" as="font" type="font/woff2" crossorigin>
-    <script defer src="https://metrics.yato-rock.com/script.js" data-website-id="b2583b05-5b09-4ea8-9322-dec77ba3cf48"></script>
+    <link rel="preload" href="images/logo.webp" as="image" type="image/webp">
     <style>
         @font-face {
             font-family: "Rock's Death";
@@ -205,24 +205,87 @@
         }
         
         .hero-title {
-            font-size: 5rem;
-            margin-bottom: -30px;
-            letter-spacing: 5px;
-            color: var(--text-medium);
-            text-transform: uppercase;
-            position: relative;
-            text-align: center;
-
-            /* Solution alternative pour un rendu homogène */
-            text-shadow: 
-                0 0 3px rgba(0,0,0,0.8),
-                0 0 3px rgba(0,0,0,0.8),
-                0 0 3px rgba(0,0,0,0.8);
-            z-index: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            color: transparent;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+            text-stroke: 0;
             
-            /* Pour les navigateurs qui supportent text-stroke */
-            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.2);
-            text-stroke: 0.5px rgba(0,0,0,0.2);        
+            /* Nouveaux styles pour l'image */
+            width: 40%;
+            max-width: 600px; /* Largeur maximale pour les grands écrans */
+            height: auto;
+            margin: 0 auto -55px; /* Conserver la marge du design original */
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            max-height: 200px; /* Limite la hauteur */
+            object-fit: contain; /* Garantit une bonne proportion */
+        }
+        
+        /* Ajustements pour tablettes */
+        @media only screen and (max-width: 992px) {
+            .hero-title {
+                max-width: 500px;
+            }
+        }
+        
+        /* Ajustements pour mobiles */
+        @media only screen and (max-width: 768px) {
+            .hero-title {
+                max-width: 400px;
+                margin-bottom: -40px; /* CORRECTION: Réduit de -20px à -10px */
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 15px;
+                max-width: 90%;
+                box-sizing: border-box;
+                letter-spacing: 1px;
+                margin: 5px auto 15px; /* CORRECTION: Réduit la marge verticale */
+                line-height: 1.4;
+            }
+            
+            .hero .btn {
+                margin-top: 30px; /* CORRECTION: Réduit l'espace au-dessus du bouton */
+            }
+        }
+        
+        @media only screen and (max-width: 576px) {
+            .hero-title {
+                max-width: 300px;
+                margin-bottom: -35px; /* CORRECTION: Réduit encore plus sur très petits écrans */
+            }
+            
+            .hero p {
+                font-size: 1rem; /* CORRECTION: Taille de police plus petite */
+                margin: 0 auto 10px; /* CORRECTION: Marge verticale minimale */
+            }
+            
+            .hero .btn {
+                margin-top: 20px; /* CORRECTION: Réduit encore l'espace au-dessus du bouton */
+            }
+        }
+        
+        @media only screen and (max-width: 400px) {
+            .hero-title {
+                max-width: 250px;
+                margin-bottom: -35px;
+            }
+            
+            .hero p {
+                font-size: 0.9rem; /* Taille minimale */
+                max-width: 100%; /* Prend toute la largeur disponible */
+                padding: 0 5px; /* Padding minimal */
+            }
         }
         
         .hero p {
@@ -1152,17 +1215,6 @@
             
             .hero-title {
                 font-size: 3.5rem;
-                margin-bottom: -20px;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-                padding: 0 15px;
-                max-width: 90%;
-                box-sizing: border-box;
-                letter-spacing: 1px;
-                margin: 15px auto 20px;
-                line-height: 1.4;
             }
             
             .hero p::before,
@@ -1224,10 +1276,6 @@
         }
         
         @media only screen and (max-width: 576px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
             .hero p {
                 font-size: 1.1rem;
             }
@@ -1251,24 +1299,6 @@
                 width: 35px;
                 height: 35px;
                 padding: 10px;
-            }
-            
-            .hero {
-                padding-top: 70px;
-                font-size: 1rem;
-                padding: 0 10px;
-                max-width: 95%;
-                letter-spacing: 0.5px;
-                margin: 10px auto 15px;
-            }
-
-        }
-
-        @media only screen and (max-width: 400px) {
-            .hero p {
-                font-size: 0.9rem; /* Taille minimale */
-                max-width: 100%; /* Prend toute la largeur disponible */
-                padding: 0 5px; /* Padding minimal */
             }
         }
     </style>
@@ -1300,7 +1330,9 @@
         <div class="hero-overlay"></div>
         
         <div class="hero-content">
-            <h1 class="hero-title">Yato</h1>
+            <h1 class="hero-title">
+                <img src="images/logo.svg" alt="YATO - Groupe de reprises rock" loading="eager">
+            </h1>
             <p>Groupe de reprises Rock</p>
             <a href="#tour" class="btn">Voir les dates</a>
         </div>
@@ -1517,6 +1549,7 @@
             <a href="#contact" class="popup-action">Nous contacter</a>
         </div>
     </div>
+    
     <script>
         // Configuration du proxy Google Apps Script
         // REMPLACER PAR VOTRE URL DE SCRIPT GOOGLE
